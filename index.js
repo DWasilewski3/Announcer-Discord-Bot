@@ -1,7 +1,15 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, GatewayIntentBits } = require('discord.js');
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 const path = require('path');
+
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+});
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -23,7 +31,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
         const player = createAudioPlayer();
 
         // Create an audio resource
-        const resource = createAudioResource(path.join(__dirname, 'testSound.mp3'));
+        const resource = createAudioResource(path.join(__dirname, 'your-audio-file.mp3'));
 
         // Play the audio resource
         player.play(resource);
@@ -36,4 +44,4 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 });
 
 // Use the environment variable for the bot token
-client.login(process.env.DISCORD_BOT_TOKEN);    
+client.login(process.env.DISCORD_BOT_TOKEN);
