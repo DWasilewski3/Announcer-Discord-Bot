@@ -36,4 +36,4 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 });
 
 // Use the environment variable for the bot token
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN);    
